@@ -1,0 +1,3 @@
+export function Footer() {
+  return <footer className="border-t border-slate-200 bg-white"><div className="mx-auto flex max-w-7xl flex-col gap-5 px-6 py-8 text-sm text-slate-500 sm:flex-row sm:items-center sm:justify-between"><p>© 2026 NyayaAI · Legal clarity. Practical action.</p><div className="flex flex-wrap gap-5"><a href="https://consumerhelpline.gov.in/" target="_blank" rel="noreferrer" className="hover:text-blue-700">National Consumer Helpline</a><a href="https://www.indiacode.nic.in/" target="_blank" rel="noreferrer" className="hover:text-blue-700">India Code</a><a href="https://edaakhil.nic.in/" target="_blank" rel="noreferrer" className="hover:text-blue-700">e-Daakhil</a></div></div></footer>;
+}

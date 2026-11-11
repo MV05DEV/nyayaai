@@ -1,0 +1,25 @@
+export const CONSUMER_PROCEDURE_SOURCES = {
+  nch: {
+    title: "National Consumer Helpline — About this portal",
+    sourceTitle: "Department of Consumer Affairs, Government of India",
+    sourceUrl: "https://consumerhelpline.gov.in/public/about",
+    authority: "Department of Consumer Affairs, Government of India",
+    publicationDate: "",
+    verificationDate: "2026-11-11",
+    sectionReference: "Pre-litigation grievance redressal",
+    content: "The Department of Consumer Affairs describes NCH as an alternate dispute redressal mechanism at the pre-litigation level and says a consumer who is not satisfied may approach the appropriate Consumer Commission. NCH is a separate route from filing a case before a Consumer Commission; its use is not described as a prerequisite to filing.",
+    keywords: ["NCH", "National Consumer Helpline", "mandatory", "prerequisite", "pre-litigation", "consumer commission", "escalation"],
+  },
+  eJagriti: {
+    title: "e-Jagriti — Consumer Complaint filing and fee information",
+    sourceTitle: "Department of Consumer Affairs, Government of India",
+    sourceUrl: "https://e-jagriti.gov.in/",
+    authority: "Department of Consumer Affairs, Government of India",
+    publicationDate: "",
+    verificationDate: "2026-11-11",
+    sectionReference: "Consumer Complaint filing flow and fee schedule",
+    content: "The e-Jagriti portal is used to file Consumer Commission cases online and displays the current filing fee schedule. District Commission fee is based on the value of goods or services paid as consideration, not the compensation or other amount claimed. The current portal schedule states: consideration up to ₹5 lakh — nil; above ₹5 lakh and up to ₹10 lakh — ₹200. Thus a purchase for ₹65,000 falls in the nil-fee band, while a purchase for ₹6 lakh falls in the ₹200 band, subject to confirming the fee displayed in e-Jagriti when filing. e-Jagriti (https://e-jagriti.gov.in/) is distinct from NCH (https://consumerhelpline.gov.in/).",
+    keywords: ["e-Jagriti", "eJagriti", "online filing", "file case online", "consumer commission portal", "filing fee", "fee", "65000", "65,000", "NCH", "consumerhelpline.gov.in"],
+    note: "Fee bands checked on the current official e-Jagriti portal on 11 November 2026. The portal is JavaScript-based; confirm the fee shown in the filing flow at filing because schedules can change. The compensation claimed is distinct from consideration paid for the goods or services.",
+  },
+} as const;

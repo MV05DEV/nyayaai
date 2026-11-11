@@ -32,6 +32,7 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # vercel
 .vercel
@@ -39,3 +40,44 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+# SQLite databases and backups
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+*.sqlite-journal
+*.db-shm
+*.db-wal
+*.sqlite3-journal
+*.sqlite3-shm
+*.sqlite3-wal
+
+# Local backups
+*.bak
+*.backup
+
+# Database backup variants
+*.db.bak
+*.db.backup
+*.sqlite.bak
+*.sqlite.backup
+*.sqlite3.bak
+*.sqlite3.backup
+
+# Common local secrets and credentials
+*.key
+*.p8
+*.p12
+*.pfx
+*.jks
+*.keystore
+/.npmrc
+/.netrc
+**/credentials.json
+**/service-account*.json
+**/secrets.json
+
+# Local audit and request/response records
+/audit/

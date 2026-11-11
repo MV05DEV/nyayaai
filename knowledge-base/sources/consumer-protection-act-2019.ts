@@ -1,9 +1,9 @@
 export const CONSUMER_PROTECTION_ACT_2019 = {
   title: "Consumer Protection Act, 2019",
   authority: "Parliament of India",
-  sourceUrl: "https://consumeraffairs.nic.in/acts-and-rules/consumer-protection-act-2019",
+  sourceUrl: "https://www.indiacode.nic.in/handle/123456789/16103?view_type=browse",
   publicationDate: "2019-08-09",
-  verificationDate: "2024-01-01",
+  verificationDate: "2026-11-11",
   sections: [
     {
       id: "CPA2019-S2-6",
@@ -44,8 +44,8 @@ export const CONSUMER_PROTECTION_ACT_2019 = {
       id: "CPA2019-S34",
       sectionReference: "Section 34",
       title: "Jurisdiction of District Commission",
-      content: "Under Section 34, the District Consumer Disputes Redressal Commission shall have jurisdiction to entertain complaints where the value of the goods or services paid as consideration does not exceed one crore rupees. The complaint can be filed where the complainant resides, works, or where the opposite party carries on business.",
-      keywords: ["district commission", "jurisdiction", "one crore", "consumer forum", "file complaint"]
+      content: "Section 34(1) gives the District Commission jurisdiction subject to the pecuniary limit prescribed by rules. Section 34(2) permits a complaint in the District Commission within whose local limits the opposite party resides or carries on business, the cause of action wholly or partly arises, or the complainant resides or personally works for gain. The Consumer Protection (Jurisdiction of the District Commission, the State Commission and the National Commission) Rules, 2021 prescribe a District Commission limit of consideration paid not exceeding ₹50 lakh.",
+      keywords: ["district commission", "territorial jurisdiction", "pecuniary jurisdiction", "fifty lakh", "50 lakh", "consumer forum", "file complaint", "resides", "works", "cause of action"]
     },
     {
       id: "CPA2019-S47",

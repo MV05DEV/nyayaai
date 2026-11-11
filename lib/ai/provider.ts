@@ -1,3 +1,7 @@
+import { isTruncatedFinishReason } from './completion-status.mjs';
+import { OpenRouterChatError, requestOpenRouter, requestWithSingleFallback } from './openrouter-client.mjs';
+import { resolveAIModelConfig } from './model-config.mjs';
+
 export interface AIMessage {
   role: 'system' | 'user' | 'assistant';
   content: string;
@@ -6,6 +10,8 @@ export interface AIMessage {
 export interface AIResponse {
   content: string;
   model: string;
+  finishReason?: string | null;
+  truncated?: boolean;
   usage?: {
     promptTokens: number;
     completionTokens: number;
@@ -17,64 +23,47 @@ export interface AIProvider {
 }
 
 class OpenRouterProvider implements AIProvider {
-  private apiKey: string;
-  private model: string;
-  private baseUrl = 'https://openrouter.ai/api/v1';
+  private readonly apiKey: string;
+  private readonly model: string;
+  private readonly fallbackModel: string;
+  private readonly baseUrl = 'https://openrouter.ai/api/v1';
 
   constructor() {
     this.apiKey = process.env.OPENROUTER_API_KEY || '';
-    this.model = process.env.AI_MODEL || 'google/gemini-flash-1.5';
+    const models = resolveAIModelConfig();
+    this.model = models.primaryModel;
+    this.fallbackModel = models.fallbackModel;
   }
 
   async chat(messages: AIMessage[], options: { temperature?: number; maxTokens?: number } = {}): Promise<AIResponse> {
     if (!this.apiKey || this.apiKey === 'your-openrouter-api-key-here') {
-      throw new Error('OPENROUTER_API_KEY is not configured. Please set it in your .env file.');
+      throw new OpenRouterChatError('OpenRouter is not configured.', { code: 'API_KEY_MISSING' });
     }
 
-    const response = await fetch(`${this.baseUrl}/chat/completions`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${this.apiKey}`,
-        'Content-Type': 'application/json',
-        'HTTP-Referer': process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
-        'X-Title': 'NyayaAI Legal Assistant',
-      },
-      body: JSON.stringify({
-        model: this.model,
+    const logger = process.env.NODE_ENV === 'production' ? null : console;
+    const result = await requestWithSingleFallback({
+      primaryModel: this.model,
+      fallbackModel: this.fallbackModel,
+      logger,
+      request: model => requestOpenRouter({
+        apiKey: this.apiKey,
+        model,
         messages,
         temperature: options.temperature ?? 0.3,
-        max_tokens: options.maxTokens ?? 2000,
+        maxTokens: options.maxTokens ?? 2000,
+        baseUrl: this.baseUrl,
+        appUrl: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
+        logger,
       }),
     });
 
-    if (!response.ok) {
-      const error = await response.text();
-      throw new Error(`OpenRouter API error (${response.status}): ${error}`);
-    }
-
-    const data = await response.json();
-    const choice = data.choices?.[0];
-    
-    if (!choice?.message?.content) {
-      throw new Error('Invalid response from AI provider');
-    }
-
-    return {
-      content: choice.message.content,
-      model: data.model || this.model,
-      usage: data.usage ? {
-        promptTokens: data.usage.prompt_tokens,
-        completionTokens: data.usage.completion_tokens,
-      } : undefined,
-    };
+    return { ...result, truncated: isTruncatedFinishReason(result.finishReason) };
   }
 }
 
 let providerInstance: AIProvider | null = null;
 
 export function getAIProvider(): AIProvider {
-  if (!providerInstance) {
-    providerInstance = new OpenRouterProvider();
-  }
+  if (!providerInstance) providerInstance = new OpenRouterProvider();
   return providerInstance;
 }

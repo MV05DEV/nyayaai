@@ -1,10 +1,10 @@
 export const ECOMMERCE_RULES_2020 = {
   title: "Consumer Protection (E-Commerce) Rules, 2020",
   authority: "Ministry of Consumer Affairs, Food and Public Distribution",
-  sourceUrl: "https://consumeraffairs.nic.in/acts-and-rules/ecommerce-rules",
+  sourceUrl: "https://consumeraffairs.gov.in/public/upload/files/E%20commerce%20rules_1732703966.pdf",
   publicationDate: "2020-07-23",
-  verificationDate: "2024-01-01",
-  note: "These rules have been subject to amendments. The 2026 amendment status should be verified on the Department of Consumer Affairs website before relying on specific provisions.",
+  verificationDate: "2026-11-11",
+  note: "The Consumer Protection (E-Commerce) (Amendment) Rules, 2026 were published in September 2026 and are stated to commence on 1 January 2027. For guidance before that commencement date, distinguish the principal 2020 rule text from future amendments; re-check the official Department rules page.",
   sections: [
     {
       id: "ECOM2020-R4",
@@ -15,24 +15,17 @@ export const ECOMMERCE_RULES_2020 = {
     },
     {
       id: "ECOM2020-R5",
-      sectionReference: "Rule 5",
-      title: "Liabilities of marketplace e-commerce entities",
-      content: "Under Rule 5, a marketplace e-commerce entity shall not adopt any unfair trade practice. It must ensure the sellers on its platform do not offer goods or services in violation of applicable laws. The marketplace must have a Grievance Officer whose name and contact details are displayed on the website.",
-      keywords: ["marketplace", "platform liability", "grievance officer", "unfair trade", "seller"]
+      sectionReference: "Rule 4(4)",
+      title: "Grievance officer obligations of e-commerce entities",
+      content: "Rule 4(4) requires every e-commerce entity to appoint a grievance officer and prominently publish the officer's name and contact details and the complaint mechanism. The grievance officer must acknowledge a consumer complaint within 48 hours and redress it within one month from receipt.",
+      keywords: ["marketplace", "platform liability", "grievance officer", "grievance redressal", "48 hours", "one month", "seller"]
     },
     {
       id: "ECOM2020-R6",
-      sectionReference: "Rule 6",
-      title: "Duties of sellers on marketplace",
-      content: "Under Rule 6, sellers offering goods or services through a marketplace e-commerce entity must provide accurate information about the goods, not refuse to take back defective goods, provide warranty/guarantee information, and not falsely represent themselves as consumers.",
-      keywords: ["seller duties", "defective goods", "warranty", "accurate information", "marketplace seller"]
+      sectionReference: "Rule 6(3)",
+      title: "Marketplace seller duties for defective goods and refunds",
+      content: "Rule 6(3) prohibits a seller offering goods or services through a marketplace e-commerce entity from refusing to take back goods or withdraw/discontinue services, or refuse a refund, where goods or services are defective, deficient, spurious, or not of the characteristics or features advertised or agreed, or are delivered late subject to the rule's stated exception for force majeure.",
+      keywords: ["seller duties", "defective goods", "refund", "marketplace seller", "Rule 6(3)"]
     },
-    {
-      id: "ECOM2020-R7",
-      sectionReference: "Rule 7",
-      title: "Grievance Redressal",
-      content: "Under Rule 7, every e-commerce entity must have a Grievance Redressal Mechanism. They must appoint a Grievance Officer who shall acknowledge the receipt of consumer complaint within 48 hours and redress the complaint within one month from the date of receipt.",
-      keywords: ["grievance", "redressal", "complaint", "48 hours", "one month", "grievance officer", "ecommerce complaint"]
-    }
   ]
 };

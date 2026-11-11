@@ -2,10 +2,11 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/db/client';
 import { extractCaseData } from '@/lib/ai/extract-case';
 
-export async function POST(request: NextRequest, { params }: { params: { id: string } }) {
+export async function POST(request: NextRequest, { params }: { params: Promise<{ id: string }> }) {
   try {
+    const { id } = await params;
     const case_ = await prisma.case.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: { messages: { orderBy: { createdAt: 'asc' } } },
     });
 
@@ -22,7 +23,7 @@ export async function POST(request: NextRequest, { params }: { params: { id: str
 
     // Update the case with extracted data
     await prisma.case.update({
-      where: { id: params.id },
+      where: { id },
       data: {
         title: caseData.title,
         category: caseData.category,

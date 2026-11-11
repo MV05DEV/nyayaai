@@ -18,7 +18,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(guidance);
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: 'Invalid request', details: error.errors }, { status: 400 });
+      return NextResponse.json({ error: 'Invalid request', details: error.issues }, { status: 400 });
     }
     
     const message = error instanceof Error ? error.message : 'Internal server error';
@@ -30,3 +30,4 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Failed to retrieve legal information' }, { status: 500 });
   }
 }
+

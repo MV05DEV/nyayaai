@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '@/lib/db/client';
+import { isLocalDevelopmentRequest } from '@/lib/db/destructive-requests';
+import { clearCaseRecords } from '@/lib/db/case-cleanup.mjs';
 
 const createCaseSchema = z.object({
   title: z.string().min(1).max(200),
@@ -27,7 +29,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(case_, { status: 201 });
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json({ error: 'Invalid data', details: error.errors }, { status: 400 });
+      return NextResponse.json({ error: 'Invalid data', details: error.issues }, { status: 400 });
     }
     console.error('Create case error:', error);
     return NextResponse.json({ error: 'Failed to create case' }, { status: 500 });
@@ -46,3 +48,20 @@ export async function GET() {
     return NextResponse.json({ error: 'Failed to fetch cases' }, { status: 500 });
   }
 }
+
+export async function DELETE(request: NextRequest) {
+  if (!isLocalDevelopmentRequest(request)) {
+    return NextResponse.json({ error: 'Conversation cleanup is available only from the local development app.' }, { status: 403 });
+  }
+  if (request.headers.get('x-nyayaai-cleanup-confirm') !== 'clear-all-conversations') {
+    return NextResponse.json({ error: 'Explicit confirmation is required to clear all conversations.' }, { status: 400 });
+  }
+
+  try {
+    const deletedCases = await clearCaseRecords(prisma);
+    return NextResponse.json({ success: true, deletedCases });
+  } catch {
+    return NextResponse.json({ error: 'Could not clear conversations. No changes were committed.' }, { status: 500 });
+  }
+}
+
